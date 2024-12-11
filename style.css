@@ -1,0 +1,21 @@
+.header
+{
+    width: 20%;
+    height: 20%;
+    background-color: aquamarine;
+}
+.content
+{
+    background-color:black;
+    height: 5000px;
+    z-index: 0;
+}
+.accedi
+{
+    background-color: brown;
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+    margin-top: 0;
+    position:relative;
+}
