@@ -1,0 +1,31 @@
+body{
+    background-color: aqua;
+}
+#header
+{
+    background-color: blue;
+}
+#header input
+{
+    z-index: 1;
+    position: absolute;
+    top:0%;   
+    right: 0%;
+    background-color: brown;
+    width: 10%;
+    height: inherit();
+}
+#header
+{
+    z-index: 0;
+    top:0px;
+    width: 100%;
+    height: 10%;
+    position: absolute;
+    text-align: center;
+}
+#condividi
+{
+    right: 5%;
+    width: 20%;
+}

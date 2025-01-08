@@ -1,0 +1,25 @@
+{
+  "name": "notepadonline",
+  "version": "1.0.0",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node db.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValeriaBrusamonti/NotePadOnline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ValeriaBrusamonti/NotePadOnline/issues"
+  },
+  "homepage": "https://github.com/ValeriaBrusamonti/NotePadOnline#readme",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}
