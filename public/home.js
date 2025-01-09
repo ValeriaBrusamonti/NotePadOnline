@@ -26,10 +26,10 @@ function Lista()
             })
             .then(data => {
                 data.forEach(nota => {
-                    if(nota.idc=cat.idc)
+                    if(nota.idc==cat.idc)
                         {
-                            // console.log(nota);
-                            // document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li>"+nota.titolo+"</li>";
+                            console.log(nota);
+                            document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li>"+nota.titolo+"</li>";
                         } 
 
                 })
