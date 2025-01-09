@@ -56,7 +56,7 @@ app.get('/note', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/home.html");  // Servi una pagina HTML (index.html)
+    res.sendFile(__dirname + "/index.html");  // Servi una pagina HTML (index.html)
 });
 
 app.listen(port, () => {

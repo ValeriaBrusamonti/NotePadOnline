@@ -9,6 +9,8 @@ function Accedi()
     Disable();
     document.getElementById("accedi").style.filter = "blur(0px)";
     document.getElementById("accedi").style.visibility = "visible";
+    document.getElementById("registrazione").style.filter = "blur(0px)";
+    document.getElementById("registrazione").style.visibility = "visible";
 }
 function Blur()
 {

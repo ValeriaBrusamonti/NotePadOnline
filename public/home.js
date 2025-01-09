@@ -1,7 +1,8 @@
-Lista();
-function Lista()
+numero=Categorie();
+console.log(numero);
+function Categorie()
 {
-    
+    let numero=0;
     fetch('/categorie')
     .then(response => {
         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
@@ -12,11 +13,20 @@ function Lista()
     })
     .then(data => {
         data.forEach(cat => {
-            console.log(cat);
-            document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li>"+cat.name+"</li>";
 
-
-            fetch('/note')
+            document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+cat.idc+"' class='cat'>"+cat.name+"</li>";
+            numero++;
+        })
+    })
+    .catch(error => {
+        console.error('Si è verificato un errore:', error);
+        document.querySelector('h1').textContent = 'Errore nel caricamento';
+    });
+    return numero;
+}
+function Note()
+{
+    fetch('/note')
             .then(response => {
                 console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
                 if (!response.ok) {
@@ -26,10 +36,10 @@ function Lista()
             })
             .then(data => {
                 data.forEach(nota => {
-                    if(nota.idc=cat.idc)
+                    if(nota.idc==cat.idc)
                         {
-                            // console.log(nota);
-                            // document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li>"+nota.titolo+"</li>";
+                            console.log(nota);
+                            document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li class='nota'>"+nota.titolo+"</li>";
                         } 
 
                 })
@@ -39,10 +49,4 @@ function Lista()
                 document.querySelector('h1').textContent = 'Errore nel caricamento';
             });
 
-        })
-    })
-    .catch(error => {
-        console.error('Si è verificato un errore:', error);
-        document.querySelector('h1').textContent = 'Errore nel caricamento';
-    });
-}
+};
