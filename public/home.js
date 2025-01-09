@@ -1,8 +1,8 @@
-numero=Categorie();
-console.log(numero);
+Categorie();
+
 function Categorie()
 {
-    let numero=0;
+
     fetch('/categorie')
     .then(response => {
         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
@@ -13,16 +13,17 @@ function Categorie()
     })
     .then(data => {
         data.forEach(cat => {
-
+            document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+cat.name+"' class='icona'><h1>"+cat.name+"</h1></div>";
             document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+cat.idc+"' class='cat'>"+cat.name+"</li>";
-            numero++;
+            // document.getElementById("container").innerHTML=
         })
     })
     .catch(error => {
         console.error('Si è verificato un errore:', error);
         document.querySelector('h1').textContent = 'Errore nel caricamento';
     });
-    return numero;
+    document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+'<div id="aggiungi"> <input id="piu" type="button" value="+"> <input type="button" id="aggiunginota" value="Aggiungi Nota"> </div>';
+
 }
 function Note()
 {
@@ -36,11 +37,8 @@ function Note()
             })
             .then(data => {
                 data.forEach(nota => {
-                    if(nota.idc==cat.idc)
-                        {
-                            console.log(nota);
-                            document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li class='nota'>"+nota.titolo+"</li>";
-                        } 
+                    console.log(nota.idc);
+                    
 
                 })
             })
@@ -50,3 +48,25 @@ function Note()
             });
 
 };
+
+function NumCategorie()
+{
+    
+    fetch('/categorie')
+    .then(response => {
+        console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Status: ${response.status}`);
+        }
+        return response.json();  // Converte la risposta JSON in un oggetto JavaScript
+    })
+    .then(data => {
+        return data;
+    })
+    .catch(error => {
+        console.error('Si è verificato un errore:', error);
+        document.querySelector('h1').textContent = 'Errore nel caricamento';
+    });
+    document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+'<div id="aggiungi"> <input id="piu" type="button" value="+"> <input type="button" id="aggiunginota" value="Aggiungi Nota"> </div>';
+
+}

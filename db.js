@@ -41,6 +41,21 @@ app.get('/categorie', (req, res) => {
   
 });
 
+// Crea una route per ottenere le categorie
+app.get('/categorie', (req, res) => {
+  // Query per ottenere gli utenti dal database
+  client.query("SELECT COUNT(*) FROM categoria", (err, result) => {
+    if (err) {
+        console.error('Errore durante la query:', err.stack);
+        return res.status(500).send('Errore durante la query');
+    }
+    // Rispondi con i risultati della query come JSON
+    res.json(result.rows);
+  });
+  
+});
+
+
 // Crea una route per ottenere le note
 app.get('/note', (req, res) => {
   // Query per ottenere gli utenti dal database
@@ -77,7 +92,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/index.html");  // Servi una pagina HTML (index.html)
+    res.sendFile(__dirname + "/home.html");  // Servi una pagina HTML (index.html)
 });
 
 app.listen(port, () => {
