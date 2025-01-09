@@ -55,6 +55,27 @@ app.get('/note', (req, res) => {
   
 });
 
+
+app.post('/accessoutente', (req, res) => {
+  let {email} = req.body;
+  if (!email) {
+    return res.status(400).json({ success: false, message: 'Email mancante' });
+  }
+  // Esegui una query sul database
+  const query = "SELECT password FROM utente WHERE email = $1";
+  client.query(query, [email], (err, result) => {
+      if (err) {
+          console.error('Errore durante l\'esecuzione della query:', err);
+          return res.status(500).json({ message: 'Errore interno del server' });
+      }
+      if (result.rows.length > 0) {
+        return res.json({ success: true, password: result.rows[0].password });
+      } else {
+        return res.json({ success: false });
+      }
+  });
+});
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/index.html");  // Servi una pagina HTML (index.html)
 });
