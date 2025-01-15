@@ -1,4 +1,5 @@
 document.getElementById("btnAccedi").addEventListener("click",Accedi);
+document.getElementById("conferma").addEventListener("click",inviaDati);
 function Accedi()
 {
     Blur();
@@ -27,8 +28,9 @@ function Disable()
 
 function inviaDati() {
     
-    var email = document.getElementById('email').value; 
-    var password = document.getElementById('password').value; 
+    //var email = document.getElementById('email').value; 
+    //var password = document.getElementById('password').value; 
 
-    window.location.href = 'pagina2.php?dato=' + encodeURIComponent(dato);  
+    //window.location.href = 'pagina2.php?dato=' + encodeURIComponent(dato);  
+    window.open("home.html", "_self");
 }
