@@ -15,7 +15,7 @@ function Accesso(){
         email : email,
     }
 
-    fetch('/accessoutente', {
+    fetch('/../../private/accessoutente', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

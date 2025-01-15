@@ -3,7 +3,7 @@ Categorie();
 function Categorie()
 {
 
-    fetch('/categorie')
+    fetch('/../../private/categorie')
     .then(response => {
         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
         if (!response.ok) {
@@ -27,7 +27,7 @@ function Categorie()
 }
 function Note()
 {
-    fetch('/note')
+    fetch('/../../private/note')
             .then(response => {
                 console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
                 if (!response.ok) {
@@ -52,7 +52,7 @@ function Note()
 function NumCategorie()
 {
     
-    fetch('/categorie')
+    fetch('/../../private/categorie')
     .then(response => {
         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
         if (!response.ok) {

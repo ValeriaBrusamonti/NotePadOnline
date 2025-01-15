@@ -92,7 +92,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/home.html");  // Servi una pagina HTML (index.html)
+    res.sendFile(__dirname + "/../public/HTMLpages/home.html");  
 });
 
 app.listen(port, () => {
