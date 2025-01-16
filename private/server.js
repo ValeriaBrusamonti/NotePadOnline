@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-//const path = require('path');  // Importa il modulo path per gestire i percorsi dei file
+const path = require('path');  // Importa il modulo path per gestire i percorsi dei file
 const { Client } = require('pg');
 const bodyParser = require('body-parser');
 const app = express();
@@ -92,7 +92,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/../public/HTMLpages/home.html");  
+    res.sendFile(path.join(__dirname, '..', 'public', 'HTMLpages', 'index.html'));  //public\HTMLpages\index.html
 });
 
 app.listen(port, () => {
