@@ -13,11 +13,11 @@ const ip = '127.0.0.1';
 
 // Configurazione del client PostgreSQL (CockroachDB)
 const client = new Client({
-    user: 'annalisabosi', 
-    host: 'personalnotes-3655.jxf.gcp-europe-west1.cockroachlabs.cloud', 
-    database: 'defaultdb', 
-    password: 'E5HTFnbAe-yrqvMPj9ZC1w', 
-    port: 26257,
+    user: 'personalnotes_owner', 
+    host: 'ep-autumn-block-a9w6vfqn.gwc.azure.neon.tech', 
+    database: 'personalnotes', 
+    password: 'JA8y7SZCBFbl', 
+    port: 5432,
     ssl: { 
       rejectUnauthorized: false // Impostare come true per un certificato SSL
     }
