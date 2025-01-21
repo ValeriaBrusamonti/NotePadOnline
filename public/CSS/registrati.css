@@ -6,7 +6,7 @@
     margin-top: 75px;
     visibility: hidden;
     position: absolute;
-    z-index: 2;
+    z-index: 0;
     background-color: aqua;
     width: 1200px;
     color:#E4F0E4;

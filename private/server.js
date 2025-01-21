@@ -11,21 +11,33 @@ const port = 3000;
 const ip = '127.0.0.1';
 
 
-// Configurazione del client PostgreSQL (CockroachDB)
+// La tua stringa di connessione Neon DB
+const connectionString = 'postgresql://personalnotes_owner:JA8y7SZCBFbl@ep-autumn-block-a9w6vfqn.gwc.azure.neon.tech/personalnotes?sslmode=require';
+
+// Creazione del client
 const client = new Client({
-    user: 'personalnotes_owner', 
-    host: 'ep-autumn-block-a9w6vfqn.gwc.azure.neon.tech', 
-    database: 'personalnotes', 
-    password: 'JA8y7SZCBFbl', 
-    port: 5432,
-    ssl: { 
-      rejectUnauthorized: false // Impostare come true per un certificato SSL
-    }
+  connectionString: connectionString,
 });
+
+async function connectToDB() {
+  try {
+    // Connessione al database
+    await client.connect();
+    console.log('Connesso con successo al database Neon!');
+    
+    // Esegui le query qui, ad esempio:
+    const res = await client.query('SELECT NOW()');
+    console.log(res.rows[0]);
+  } catch (err) {
+    console.error('Errore durante la connessione:', err.stack);
+  } finally {
+    // Chiudi la connessione
+    await client.end();
+  }
+}
+
+connectToDB();
 // Connessione al database
-client.connect()
-    .then(() => console.log('Connesso al database PostgreSQL'))
-    .catch((err) => console.error('Errore di connessione:', err));
 
 // Crea una route per ottenere le categorie
 app.get('/categorie', (req, res) => {
@@ -44,7 +56,7 @@ app.get('/categorie', (req, res) => {
 // Crea una route per ottenere le categorie
 app.get('/categorie', (req, res) => {
   // Query per ottenere gli utenti dal database
-  client.query("SELECT COUNT(*) FROM categoria", (err, result) => {
+  client.query("SELECT COUNT(*) FROM categorie", (err, result) => {
     if (err) {
         console.error('Errore durante la query:', err.stack);
         return res.status(500).send('Errore durante la query');
@@ -98,4 +110,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Server in ascolto su http://localhost:${port}`);
     });
-    
+

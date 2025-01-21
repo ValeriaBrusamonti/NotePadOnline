@@ -10,7 +10,8 @@ function Accedi()
     document.getElementById("accedi").style.filter = "blur(0px)";
     document.getElementById("accedi").style.visibility = "visible";
     document.getElementById("registrazione").style.filter = "blur(0px)";
-    document.getElementById("registrazione").style.visibility = "visible";
+    // document.getElementById("registrazione").style.visibility = "visible";
+    document.getElementById("confermaCredenziali").disabled = false;
 }
 function Blur()
 {
@@ -35,6 +36,7 @@ function Disable()
 document.getElementById('confermaCredenziali').addEventListener('click', Accesso)
 
 function Accesso(){
+
     let email = document.getElementById("emailU").value;
     let password = document.getElementById("passwordU").value;
 
@@ -48,7 +50,7 @@ function Accesso(){
     const requestBody = {
         email : email,
     }
-
+    console.log(requestBody);
     fetch('/../../private/accessoutente', {
         method: 'POST',
         headers: {
