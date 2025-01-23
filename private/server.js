@@ -57,18 +57,15 @@ app.get('/categorie', (req, res) => {
   
 });
 
+
+
 // Crea una route per ottenere le categorie
-app.get('/categorie', (req, res) => {
+app.post('/categorieascelta', (req, res) => {
   // Query per ottenere gli utenti dal database
-  client.query("SELECT COUNT(*) FROM categorie", (err, result) => {
-    if (err) {
-        console.error('Errore durante la query:', err.stack);
-        return res.status(500).send('Errore durante la query');
-    }
-    // Rispondi con i risultati della query come JSON
+  const query = "SELECT * FROM categorie c INNER JOIN note no ON c.idc = no.idc INNER JOIN accesso a ON a.idn = no.idn WHERE a.email = '$1'";
+  client.query(query, [email], (err, result) => {
     res.json(result.rows);
-  });
-  
+    });
 });
 
 
