@@ -1,9 +1,9 @@
 Categorie();
-
+Note();
 function Categorie()
 {
 
-    fetch('/../../private/categorie')
+    fetch('/categorie')
     .then(response => {
         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
         if (!response.ok) {
@@ -12,11 +12,13 @@ function Categorie()
         return response.json();  // Converte la risposta JSON in un oggetto JavaScript
     })
     .then(data => {
-        data.forEach(cat => {
+        
             document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+cat.name+"' class='icona'><h1>"+cat.name+"</h1></div>";
             document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+cat.idc+"' class='cat'>"+cat.name+"</li>";
             // document.getElementById("container").innerHTML=
-        })
+
+            Note(data);
+        
     })
     .catch(error => {
         console.error('Si è verificato un errore:', error);
@@ -25,9 +27,9 @@ function Categorie()
     document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+'<div id="aggiungi"> <input id="piu" type="button" value="+"> <input type="button" id="aggiunginota" value="Aggiungi Nota"> </div>';
 
 }
-function Note()
+function Note(categorie)
 {
-    fetch('/../../private/note')
+    fetch('/note')
             .then(response => {
                 console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
                 if (!response.ok) {
@@ -36,11 +38,19 @@ function Note()
                 return response.json();  // Converte la risposta JSON in un oggetto JavaScript
             })
             .then(data => {
-                data.forEach(nota => {
-                    console.log(nota.idc);
+                categorie.forEach(cat => 
+                    {
+                        document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+cat.name+"' class='icona'><h1>"+cat.name+"</h1></div>";
+            document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+cat.idc+"' class='cat'>"+cat.name+"</li>";
+                        data.forEach(nota => {
+                    
+                    if(categoria.idc==nota.idc) {document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+nota.titolo+"' class='icona'><h1>"+nota.titolo+"</h1></div>";
+                    document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+nota.titolo+"' class='cat'>"+nota.titolo+"</li>";}
                     
 
                 })
+                    });
+                
             })
             .catch(error => {
                 console.error('Si è verificato un errore:', error);

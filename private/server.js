@@ -19,30 +19,34 @@ const client = new Client({
   connectionString: connectionString,
 });
 
-async function connectToDB() {
-  try {
-    // Connessione al database
-    await client.connect();
-    console.log('Connesso con successo al database Neon!');
-    
-    // Esegui le query qui, ad esempio:
-    const res = await client.query('SELECT NOW()');
-    console.log(res.rows[0]);
-  } catch (err) {
-    console.error('Errore durante la connessione:', err.stack);
-  } finally {
-    // Chiudi la connessione
-    await client.end();
-  }
-}
+client.connect()
+  .then(() => console.log('Connesso con successo al database Neon!'))
+  .catch(err => console.error('Errore durante la connessione:', err.stack));
 
-connectToDB();
+// async function connectToDB() {
+//   try {
+//     // Connessione al database
+//     await client.connect();
+//     console.log('Connesso con successo al database Neon!');
+    
+//     // Esegui le query qui, ad esempio:
+//     const res = await client.query('SELECT NOW()');
+//     console.log(res.rows[0]);
+//   } catch (err) {
+//     console.error('Errore durante la connessione:', err.stack);
+//   } finally {
+//     // Chiudi la connessione
+//     await client.end();
+//   }
+// }
+
+// connectToDB();
 // Connessione al database
 
 // Crea una route per ottenere le categorie
 app.get('/categorie', (req, res) => {
   // Query per ottenere gli utenti dal database
-  client.query("SELECT * FROM categoria", (err, result) => {
+  client.query("SELECT * FROM categorie", (err, result) => {
     if (err) {
         console.error('Errore durante la query:', err.stack);
         return res.status(500).send('Errore durante la query');
@@ -71,7 +75,7 @@ app.get('/categorie', (req, res) => {
 // Crea una route per ottenere le note
 app.get('/note', (req, res) => {
   // Query per ottenere gli utenti dal database
-  client.query("SELECT * FROM nota", (err, result) => {
+  client.query("SELECT * FROM note", (err, result) => {
     if (err) {
         console.error('Errore durante la query:', err.stack);
         return res.status(500).send('Errore durante la query');
@@ -104,7 +108,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'HTMLpages', 'index.html'));  //public\HTMLpages\index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'HTMLpages', 'home.html'));  //public\HTMLpages\index.html
 });
 
 app.listen(port, () => {
