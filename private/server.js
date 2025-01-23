@@ -86,6 +86,21 @@ app.get('/note', (req, res) => {
   
 });
 
+// Crea una route per ottenere le note
+app.get('/utenti', (req, res) => {
+  // Query per ottenere gli utenti dal database
+  client.query("SELECT * FROM utenti", (err, result) => {
+    if (err) {
+        console.error('Errore durante la query:', err.stack);
+        return res.status(500).send('Errore durante la query');
+    }
+    // Rispondi con i risultati della query come JSON
+    res.json(result.rows);
+  });
+  
+});
+
+
 
 app.post('/accessoutente', (req, res) => {
   let {email} = req.body;
@@ -93,6 +108,7 @@ app.post('/accessoutente', (req, res) => {
     return res.status(400).json({ success: false, message: 'Email mancante' });
   }
   // Esegui una query sul database
+
   const query = "SELECT password FROM utenti WHERE email = $1";
   client.query(query, [email], (err, result) => {
       if (err) {
@@ -108,7 +124,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'HTMLpages', 'home.html'));  //public\HTMLpages\index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_index.html'));  //public\HTMLpages\index.html
 });
 
 app.listen(port, () => {
