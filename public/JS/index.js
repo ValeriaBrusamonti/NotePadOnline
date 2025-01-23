@@ -51,7 +51,8 @@ function Accesso(){
         email : email,
     }
     console.log(requestBody);
-    fetch('/../../private/accessoutente', {
+    fetch('http://localhost:3000/accessoutente', {
+        
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -74,6 +75,6 @@ function Accesso(){
     })
     .catch(error => {
         console.error('Errore durante la richiesta:', error);
-        alert('Errore nell\'invio dei dati');
+        //alert('Errore nell\'invio dei dati');
     });
 }

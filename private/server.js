@@ -89,7 +89,7 @@ app.post('/accessoutente', (req, res) => {
     return res.status(400).json({ success: false, message: 'Email mancante' });
   }
   // Esegui una query sul database
-  const query = "SELECT password FROM utente WHERE email = $1";
+  const query = "SELECT password FROM utenti WHERE email = $1";
   client.query(query, [email], (err, result) => {
       if (err) {
           console.error('Errore durante l\'esecuzione della query:', err);
