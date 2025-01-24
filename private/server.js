@@ -80,10 +80,10 @@ app.post('/categorieascelta', (req, res) => {
   // Query con parametri per evitare SQL Injection
   const query = `
     SELECT * 
-    FROM categorie c 
-    INNER JOIN note no ON c.idc = no.idc 
-    INNER JOIN accesso a ON a.idn = no.idn 
+    FROM appartenenza a
+    INNER JOIN categorie c ON c.idc = a.idc
     WHERE a.email = $1
+    ORDER BY c.idc
   `;
 
   // Esegui la query
@@ -125,7 +125,7 @@ app.post('/noteascelta', (req, res) => {
 // Crea una route per ottenere le note
 app.get('/note', (req, res) => {
   // Query per ottenere gli utenti dal database
-  client.query("SELECT * FROM note", (err, result) => {
+  client.query("SELECT * FROM note ORDER BY titolo", (err, result) => {
     if (err) {
         console.error('Errore durante la query:', err.stack);
         return res.status(500).send('Errore durante la query');
