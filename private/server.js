@@ -60,14 +60,67 @@ app.get('/categorie', (req, res) => {
 
 
 // Crea una route per ottenere le categorie
+// app.post('/categorieascelta', (req, res) => {
+//   // Query per ottenere gli utenti dal database
+//   const query = "SELECT * FROM categorie c INNER JOIN note no ON c.idc = no.idc INNER JOIN accesso a ON a.idn = no.idn WHERE a.email = '$1'";
+//   client.query(query, [email], (err, result) => {
+//     res.json(result.rows);
+//     });
+// });
+
+
 app.post('/categorieascelta', (req, res) => {
-  // Query per ottenere gli utenti dal database
-  const query = "SELECT * FROM categorie c INNER JOIN note no ON c.idc = no.idc INNER JOIN accesso a ON a.idn = no.idn WHERE a.email = '$1'";
+  // Assumiamo che l'email venga passata nel body della richiesta
+  const email = req.body.email;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email mancante' });
+  }
+
+  // Query con parametri per evitare SQL Injection
+  const query = `
+    SELECT * 
+    FROM categorie c 
+    INNER JOIN note no ON c.idc = no.idc 
+    INNER JOIN accesso a ON a.idn = no.idn 
+    WHERE a.email = $1
+  `;
+
+  // Esegui la query
   client.query(query, [email], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Errore nel database' });
+    }
     res.json(result.rows);
-    });
+  });
 });
 
+app.post('/noteascelta', (req, res) => {
+  // Assumiamo che l'email venga passata nel body della richiesta
+  const email = req.body.email;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email mancante' });
+  }
+
+  // Query con parametri per evitare SQL Injection
+  const query = `
+    SELECT * 
+    FROM note no 
+    INNER JOIN accesso a ON a.idn = no.idn 
+    WHERE a.email = $1 AND idc IS NULL
+  `;
+
+  // Esegui la query
+  client.query(query, [email], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Errore nel database' });
+    }
+    res.json(result.rows);
+  });
+});
 
 // Crea una route per ottenere le note
 app.get('/note', (req, res) => {
