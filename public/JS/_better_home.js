@@ -105,11 +105,11 @@ function Categorie()
         return response.json();  // Converte la risposta JSON in un oggetto JavaScript
     })
     .then(data => {
-            let lista = data;
+            
             // document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+cat.name+"' class='icona'><h1>"+cat.name+"</h1></div>";
             // document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+cat.idc+"' class='cat'>"+cat.name+"</li>";
             // document.getElementById("container").innerHTML=
-            Note(lista);
+            Note(data);
             
     })
     .catch(error => {
@@ -133,7 +133,7 @@ function Note(categorie)
                 categorie.forEach(categoria => 
                     {
                         document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+categoria.name+"' class='icona'><h1>"+categoria.name+"</h1></div>";
-            document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+categoria.idc+"' class='cat'>"+categoria.name+"</li>";
+                        document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+categoria.idc+"' class='cat'>"+categoria.name+"</li>";
                         data.forEach(nota => {
                     if(categoria.idc==nota.idc) {
                     // document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+nota.titolo+"' class='icona'><h1>"+nota.titolo+"</h1></div>";
