@@ -1,8 +1,22 @@
 let params = new URLSearchParams(window.location.search);
 let user = params.get('name');
 
+
+    const icone = document.querySelectorAll('.icona');
+
+    icone.forEach(icona => {
+    icona.addEventListener('click', () => {
+        alert('Bottone cliccato!');
+    });
+});
+
 console.log(user);Categorie();
 
+
+function ApriCartella()
+{
+    console.log("Funziona");
+}
 // async function Categorie() {
 //     let email = user;
 //     try {
@@ -105,7 +119,7 @@ function Categorie()
         return response.json();  // Converte la risposta JSON in un oggetto JavaScript
     })
     .then(data => {
-            console.log(data);
+
             // document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+cat.name+"' class='icona'><h1>"+cat.name+"</h1></div>";
             // document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+cat.idc+"' class='cat'>"+cat.name+"</li>";
             // document.getElementById("container").innerHTML=
@@ -132,7 +146,7 @@ function Note(categorie)
             .then(data => {
                 categorie.forEach(categoria => 
                     {
-                        console.log("Categoria");
+
                         document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+categoria.name+"' class='icona'><h1>"+categoria.name+"</h1></div>";
                         document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+categoria.idc+"' class='cat'>"+categoria.name+"</li>";
                         data.forEach(nota => {
