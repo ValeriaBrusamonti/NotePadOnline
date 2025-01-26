@@ -122,9 +122,74 @@ app.post('/noteascelta', (req, res) => {
   });
 });
 
-// Crea una route per ottenere le note
+//note con la relativa categoria PER SEZIONE REPORTISTICA
+app.get('/note_categorie', (req, res) => {
+
+  const query = `
+    SELECT no.titolo, no.contenuto, no.data_creazione, c.name AS categoria
+    FROM note no 
+    INNER JOIN categorie c ON c.idc = no.idc `;
+
+  client.query(query, (err, result) => {
+    if (err) {
+        console.error('Errore durante la query:', err.stack);
+        return res.status(500).send('Errore durante la query');
+    }
+    // Rispondi con i risultati della query come JSON
+    res.json(result.rows);
+  });
+  
+});
+
+
+
+app.get('/note_heavy_user', (req, res) => {
+
+  const query = `
+    SELECT * 
+    FROM note no 
+    INNER JOIN accesso a ON a.idn = no.idn 
+    WHERE a.email = (SELECT a.email
+        FROM accesso a
+            GROUP BY a.email
+                ORDER BY COUNT(*) DESC
+                    LIMIT 1) `;
+
+  client.query(query, (err, result) => {
+    if (err) {
+        console.error('Errore durante la query:', err.stack);
+        return res.status(500).send('Errore durante la query');
+    }
+    // Rispondi con i risultati della query come JSON
+    res.json(result.rows);
+  });
+  
+});
+
+
+// Crea una route per ottenere le note che non hanno categorie
+app.get('/note_senza_categorie', (req, res) => {
+
+  const query = `
+    SELECT titolo, contenuto, data_creazione
+    FROM note 
+    WHERE idc IS NULL `;
+
+  client.query(query, (err, result) => {
+    if (err) {
+        console.error('Errore durante la query:', err.stack);
+        return res.status(500).send('Errore durante la query');
+    }
+    // Rispondi con i risultati della query come JSON
+    res.json(result.rows);
+  });
+  
+});
+
+
+
 app.get('/note', (req, res) => {
-  // Query per ottenere gli utenti dal database
+  
   client.query("SELECT * FROM note", (err, result) => {
     if (err) {
         console.error('Errore durante la query:', err.stack);
@@ -135,6 +200,7 @@ app.get('/note', (req, res) => {
   });
   
 });
+
 
 // Crea una route per ottenere le note
 app.get('/utenti', (req, res) => {

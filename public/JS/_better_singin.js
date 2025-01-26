@@ -52,3 +52,23 @@ function Accesso()
     });
 }
 
+
+
+document.getElementById("amministratorButton").addEventListener("click", AdminAccesso);
+
+function AdminAccesso(){
+
+    let password = document.getElementById("password").value;
+    if(!password){
+        alert("Inserisci la password amministratore");
+        return;
+    }
+    else if(password == "admin"){
+        window.open("better_admin.html", "_self");
+    }
+    else{
+        alert("Password Errata!!");
+
+    }
+}
+

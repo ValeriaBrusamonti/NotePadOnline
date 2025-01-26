@@ -1763,14 +1763,15 @@
   }
   
   .table-sm > :not(caption) > * > * {
-    padding: 0.25rem 0.25rem;
+    padding: 1rem 1rem;
+    text-align: center;
   }
   
   .table-bordered > :not(caption) > * {
-    border-width: 1px 0;
+    border-width: 2px 0;
   }
   .table-bordered > :not(caption) > * > * {
-    border-width: 0 1px;
+    border-width: 0 2px;
   }
   
   .table-borderless > :not(caption) > * > * {
@@ -11046,6 +11047,7 @@
     text-transform: uppercase;
     letter-spacing: 0.15rem;
     border: 0;
+    margin-bottom: 7rem;
   }
   
   .masthead {
@@ -11054,7 +11056,7 @@
     height: auto;
     min-height: 35rem;
     padding: 15rem 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../assets/img/bg-masthead.jpg");
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("/CSS/bg-masthead.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -11098,7 +11100,7 @@
   
   .about-section {
     padding-top: 10rem;
-    background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+    background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 80%, rgba(0, 0, 0, 0.5) 100%);
   }
   .about-section p {
     margin-bottom: 5rem;
@@ -11106,6 +11108,7 @@
   
   .projects-section {
     padding: 10rem 0;
+    background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.5) 100%);
   }
   .projects-section .featured-text {
     padding: 2rem;
