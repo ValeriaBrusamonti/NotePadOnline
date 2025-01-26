@@ -2,16 +2,15 @@ let params = new URLSearchParams(window.location.search);
 let user = params.get('name');
 
 
-    const icone = document.querySelectorAll('.icona');
-
-    icone.forEach(icona => {
-    icona.addEventListener('click', () => {
-        alert('Bottone cliccato!');
-    });
-});
-
 console.log(user);Categorie();
 
+function AggiungiEvento()
+{
+    const icone = document.querySelectorAll('.icona');
+    icone.forEach(icona => {
+        icona.addEventListener('dblclick', ApriCartella);
+    });
+}
 
 function ApriCartella()
 {
@@ -152,16 +151,16 @@ function Note(categorie)
                         data.forEach(nota => {
                     if(categoria.idc==nota.idc) {
                     // document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+nota.titolo+"' class='icona'><h1>"+nota.titolo+"</h1></div>";
-                    document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li style='color:red;' id='"+nota.titolo+"' class='cat'>"+nota.titolo+"</li>";}
+                    document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li   id='"+nota.titolo+"' class='nota'>"+nota.titolo+"</li>";}
                     
                 })
                     });
                     document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+"<div id='"+"NoteSenzaCategorie"+"' class='icona'><h1>"+"NoteSenzaCategorie"+"</h1></div>";
                     document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+"NoteSenzaCategorie"+"' class='cat'>"+"NoteSenzaCategorie"+"</li>";
                     data.forEach(nota=>{
-                        if(nota.idc==null) document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li style='color:red;' id='"+nota.titolo+"' class='cat'>"+nota.titolo+"</li>" ;
+                        if(nota.idc==null) document.getElementById("lista").innerHTML=document.getElementById("lista").innerHTML+"<li id='"+nota.titolo+"' class='nota'>"+nota.titolo+"</li>" ;
                     })
-                
+                AggiungiEvento();
             })
             .catch(error => {
                 console.error('Si è verificato un errore:', error);

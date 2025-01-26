@@ -2,7 +2,7 @@ body
 {
     background-color: white;
     height: 100vh;
-    background-color:#1D7A34;
+    background-image: linear-gradient(rgb(180, 180, 180),black);
     font-family: serif;
     padding: 0vh;
     margin: 0vh;
@@ -41,7 +41,7 @@ body
 table
 {
     border:solid;
-    border-color: #BBE0B1;
+    border-color:white;
     border-width: 0.5vh;
     width: 100vw;
     text-align: center;
@@ -56,8 +56,9 @@ table
 }
 .header
 {
-    background-color: #0C4714;
-    color: #BBE0B1;
+    background-color: gray;
+    text-decoration-style: none;
+    color: white;
     font-size: 3.5vh;
     line-height: 5vh;
     text-align: center;
@@ -108,7 +109,7 @@ li
     height: 93vh;
     margin: 0vh;
     padding: 0vh;
-    background-color: #0C4714;
+
     float: left;
     overflow: auto; 
     z-index: 0;
@@ -148,5 +149,19 @@ li
 
 .cat
 {
-    background-color: aqua;
+    text-align: center;
+    background-color: #64a19d;
+    color:white;
+    vertical-align:bottom;
+}
+
+.cat:hover
+{
+    background-color: white;
+    color: #64a19d;
+}
+
+.nota
+{
+    background-color: white;
 }
