@@ -122,6 +122,30 @@ app.post('/noteascelta', (req, res) => {
   });
 });
 
+
+app.post('/info_utente', (req, res) => {
+  // Assumiamo che l'email venga passata nel body della richiesta
+  const email = req.body.email;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email mancante' });
+  }
+
+  // Query con parametri per evitare SQL Injection
+  const query = `SELECT * FROM utenti WHERE email = $1`;
+
+  // Esegui la query
+  client.query(query, [email], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Errore nel database' });
+    }
+    res.json(result.rows);
+  });
+});
+
+
+
 //note con la relativa categoria PER SEZIONE REPORTISTICA
 app.get('/note_categorie', (req, res) => {
 
