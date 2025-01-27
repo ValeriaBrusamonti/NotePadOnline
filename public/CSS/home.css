@@ -2,11 +2,12 @@ body
 {
     background-color: white;
     height: 100vh;
-    background-image: linear-gradient(rgb(180, 180, 180),black);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000 100%), url("../images/sfondo.jpg");
+    background-size: cover;
     font-family: serif;
     padding: 0vh;
     margin: 0vh;
-    overflow: hidden;
+    overflow: hidden;   
     z-index: 0;
 }
 
@@ -65,13 +66,11 @@ table
 }
 #navbar
 {
-    background-color: aliceblue;
     width: 20vw;
     margin: 0vw;
     display: inline-block;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
     padding: 1.5vh 3vh;
     float: left;
     list-style: none;
@@ -90,6 +89,7 @@ ul
     overflow-y: scroll; 
     max-height: 93vh;
     overflow-x: hidden;
+
 }
 li
 {
@@ -144,24 +144,65 @@ li
     background-position: center;
     margin-top: 10vh;
     margin-left: 8vw;
-    background-image: url("https://png.pngtree.com/png-vector/20190916/ourlarge/pngtree-folder-icon-for-your-project-png-image_1731079.jpg");
+    background-image: url("../images/cartella.png");
+    background-position: center;
+    border: 0.1vh black solid;
+    text-align: center;
 }
-
+.icona h1
+{
+    color: black;
+    background-color: white;
+    font-weight: normal;
+    font-size: 3.5vh;
+    border-radius: 25vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
+    border: 0.1vh black solid;
+}
+.icona_nota
+{
+    height: 16vw;
+    width: 16vw;
+    float: left;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10vh;
+    margin-left: 8vw;
+    background-image: url("../images/cartella.png");
+    background-position: center;
+    border: 0.1vh black solid;
+    text-align: center;
+}
+.icona_nota h1
+{
+    color: black;
+    background-color: white;
+    font-weight: normal;
+    font-size: 3.5vh;
+    border-radius: 25vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
+    border: 0.1vh black solid;
+}
 .cat
 {
     text-align: center;
     background-color: #64a19d;
     color:white;
     vertical-align:bottom;
+    opacity: 70%;
 }
 
 .cat:hover
 {
-    background-color: white;
-    color: #64a19d;
+    /* background-color: white;
+    color: #64a19d; */
+    opacity: 100%;
 }
 
 .nota
 {
+    opacity: 100%;
     background-color: white;
 }
