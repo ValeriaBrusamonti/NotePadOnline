@@ -65,6 +65,10 @@
     --bs-code-color: #d63384;
     --bs-highlight-bg: #faf4e0;
   }
+
+  li h3.Annahover:hover {
+    text-decoration: underline;
+}
   
   *,
   *::before,

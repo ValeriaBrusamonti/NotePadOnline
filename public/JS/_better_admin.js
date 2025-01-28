@@ -1,26 +1,40 @@
 document.getElementById("ViewUsersOperations").addEventListener("click", UsersOperations);
 document.getElementById("ViewReportisticOptions").addEventListener("click", ReportisticOptions);
-
+const container = document.getElementById("contenuto");
 
 function ReportisticOptions(){
-    const container = document.getElementById("contenuto");
+    
 
     //Pulisce lo spazio prima di aggiungere la tabella rimuovendo tutti i figli del container
-    while (container.firstChild) {
-        container.removeChild(container.firstChild);
-    }
+    // while (container.firstChild) {
+    //     container.removeChild(container.firstChild);
+    // }
 
-    const titoloparagrafo = document.createElement('h3');
-    titoloparagrafo.classList.add('text-dark')
-    titoloparagrafo.classList.add('fw-semibold')
-    titoloparagrafo.classList.add('pb-4')
-    titoloparagrafo.textContent = "♦ Note dell'utente che maggiormente utilizza la piattaforma"
-    container.appendChild(titoloparagrafo)
-    ViewNotesHU(container);
+    // const titoloparagrafo = document.createElement('h3');
+    // titoloparagrafo.classList.add('text-dark','fw-semibold','pb-4')
+    // titoloparagrafo.id = "NotesOfHeavyUser"
+    // titoloparagrafo.textContent = "♦ Note dell'utente che maggiormente utilizza la piattaforma"
+    // container.appendChild(titoloparagrafo)
+    // const titoloparagrafo2 = document.createElement('h3');
+    // titoloparagrafo2.classList.add('text-dark','fw-semibold','pb-4')
+    // titoloparagrafo2.id = "NotesWithCategories"
+    // titoloparagrafo2.textContent = "♦ Tutte le note con la loro categoria"
+    // container.appendChild(titoloparagrafo2)
+    // const titoloparagrafo3 = document.createElement('h3');
+    // titoloparagrafo3.classList.add('text-dark','fw-semibold','pb-4')
+    // titoloparagrafo3.id = "NotesWithoutCategories"
+    // titoloparagrafo3.textContent = "♦ Tutte le note che non appartengono a nessuna categoria"
+    // container.appendChild(titoloparagrafo3)
+
+    document.getElementById("OPTIONS").style.display = 'block';
+    
+    
 }
 
+//document.getElementById("NotesOfHeavyUser").addEventListener("click", ViewNotesHU(container));
+
+
 function UsersOperations(){
-    const container = document.getElementById("contenuto");
 
     //Pulisce lo spazio prima di aggiungere la tabella rimuovendo tutti i figli del container
     while (container.firstChild) {
@@ -33,11 +47,11 @@ function UsersOperations(){
     titoloparagrafo.classList.add('pb-4')
     titoloparagrafo.textContent = "♦ Elenco Utenti"
     container.appendChild(titoloparagrafo)
-    GetUtenti(container);
+    GetUtenti();
 
 }
 
-function GetUtenti(container) {
+function GetUtenti() {
 
     fetch('/utenti')
       .then((response) => {
@@ -184,7 +198,7 @@ function GetUtenti(container) {
 
 // document.getElementById("ViewNotesOfHeavyUser").addEventListener("click", ViewNotesHU);
 
-function ViewNotesHU(container) {
+function ViewNotesHU() {
 
     fetch('/note_heavy_user')
       .then((response) => {
@@ -199,7 +213,7 @@ function ViewNotesHU(container) {
         // Trova il contenitore dove inserire la tabella
         //const container = document.getElementById("tablecontainer4");
 
-        const table = PopolaTabellaNote(note, false);
+        const table = PopolaTabellaNote(note, true);
 
 
         // Aggiungi la tabella al contenitore
@@ -343,7 +357,8 @@ function CreaTabellaUtenti(users){
         row.appendChild(surnameCell);
 
         const dataNCell = document.createElement("td");
-        dataNCell.textContent = user.birth_date;
+        const birthDate = new Date(user.birth_date);
+        dataNCell.textContent = birthDate.toISOString().split('T')[0];
         row.appendChild(dataNCell);
 
         const cityCell = document.createElement("td");
