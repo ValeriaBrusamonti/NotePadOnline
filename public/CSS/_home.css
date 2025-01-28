@@ -169,10 +169,12 @@ li
     background-position: center;
     margin-top: 10vh;
     margin-left: 8vw;
-    background-image: url("../images/cartella.png");
+    background-image: url("../images/nota.png");
     background-position: center;
     border: 0.1vh black solid;
     text-align: center;
+    background-size: 10vw;
+    background-repeat: no-repeat;
 }
 .icona_nota h1
 {

@@ -174,7 +174,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_index.html'));  //public\HTMLpages\index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_nota.html'));  //public\HTMLpages\index.html
 });
 
 app.listen(port, () => {

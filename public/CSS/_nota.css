@@ -1,0 +1,59 @@
+ /* #body
+{ */
+    /* background-image: url("../images/sfondo.jpg") ; */
+    /* background-image: url("../images/sfondo.jpg"); */
+    /* background-size: cover;} */
+#editor {
+    width: 80vw;
+    height: 90vh;
+    margin-left: 10vw ;
+    padding: 1vh;
+    border: 0.1vh solid #ccc;
+    font-family: Arial, sans-serif;
+    font-size: 1.6vh;
+    overflow-y: auto;
+    background-color: white;
+    opacity: 90%;
+    margin-right: 0vh;
+    float: left;
+    display: block;
+}
+
+button {
+    display: block;
+    float: right;
+    margin: 0vh;
+    margin-top: 1vh;
+    margin-right: 1vw;
+    padding: 0.3vh;
+    padding-right: 0vh;
+    padding-left: 0vh;
+    font-size: 1.6vh;
+    cursor: pointer;
+    width: 5vw;
+    text-align: center;
+}
+
+button
+{
+    text-align: center;
+    background-color: #64a19d;
+    color:white;
+    opacity: 70%;
+}
+
+button:hover
+{
+    /* background-color: white;
+    color: #64a19d; */
+    opacity: 100%;
+}
+
+#titolo
+{
+    font-size: 5vh;
+    margin: 0vh;
+    text-align: center;
+    background-color: gray;
+    border: 0.1vh solid black;
+}
