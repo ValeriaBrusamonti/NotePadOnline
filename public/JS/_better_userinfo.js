@@ -192,7 +192,7 @@ function GetNotes() {
         const table = document.createElement('table');
         table.id = "NotesTable";
         table.classList.add('table-sm','caption-top', 'table-primary', 'table-bordered');        
-       
+      
     
         // Crea il <thead> con le intestazioni
         const thead = document.createElement('thead');

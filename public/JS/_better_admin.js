@@ -4,35 +4,16 @@ const container = document.getElementById("contenuto");
 
 function ReportisticOptions(){
     
+  document.getElementById("OPTIONS").style.display = 'block';
 
-    //Pulisce lo spazio prima di aggiungere la tabella rimuovendo tutti i figli del container
-    // while (container.firstChild) {
-    //     container.removeChild(container.firstChild);
-    // }
+  checkAndRemoveElement("UsersTable")
 
-    // const titoloparagrafo = document.createElement('h3');
-    // titoloparagrafo.classList.add('text-dark','fw-semibold','pb-4')
-    // titoloparagrafo.id = "NotesOfHeavyUser"
-    // titoloparagrafo.textContent = "♦ Note dell'utente che maggiormente utilizza la piattaforma"
-    // container.appendChild(titoloparagrafo)
-    // const titoloparagrafo2 = document.createElement('h3');
-    // titoloparagrafo2.classList.add('text-dark','fw-semibold','pb-4')
-    // titoloparagrafo2.id = "NotesWithCategories"
-    // titoloparagrafo2.textContent = "♦ Tutte le note con la loro categoria"
-    // container.appendChild(titoloparagrafo2)
-    // const titoloparagrafo3 = document.createElement('h3');
-    // titoloparagrafo3.classList.add('text-dark','fw-semibold','pb-4')
-    // titoloparagrafo3.id = "NotesWithoutCategories"
-    // titoloparagrafo3.textContent = "♦ Tutte le note che non appartengono a nessuna categoria"
-    // container.appendChild(titoloparagrafo3)
-
-    document.getElementById("OPTIONS").style.display = 'block';
-    
     
 }
 
-//document.getElementById("NotesOfHeavyUser").addEventListener("click", ViewNotesHU(container));
-
+document.getElementById("NotesOfHeavyUser").addEventListener("click", ViewNotesHU);
+document.getElementById("NotesWithCategories").addEventListener("click", NotesWithCategories);
+document.getElementById("NotesWithoutCategories").addEventListener("click", NotesWithoutCategories);
 
 function UsersOperations(){
 
@@ -42,10 +23,8 @@ function UsersOperations(){
     }
 
     const titoloparagrafo = document.createElement('h3');
-    titoloparagrafo.classList.add('text-dark')
-    titoloparagrafo.classList.add('fw-semibold')
-    titoloparagrafo.classList.add('pb-4')
-    titoloparagrafo.textContent = "♦ Elenco Utenti"
+    titoloparagrafo.classList.add('text-dark','fw-semibold','pb-4')
+    titoloparagrafo.textContent = "Elenco Utenti"
     container.appendChild(titoloparagrafo)
     GetUtenti();
 
@@ -71,6 +50,8 @@ function GetUtenti() {
         console.error('Errore nella chiamata API:', error);
       });
   }
+
+
 // window.addEventListener('DOMContentLoaded', event => {
 
 //     // Navbar shrink function
@@ -94,61 +75,61 @@ function GetUtenti() {
 
 // document.getElementById("ViewNotesWithCategories").addEventListener("click", NotesWithCategories);
 
-// function NotesWithCategories(){
-//     fetch('/note_categorie')
-//     .then(response => {
-//         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
-//         if (!response.ok) {
-//             throw new Error(`Errore HTTP! Status: ${response.status}`);
-//         }
-//         return response.json();  // Converte la risposta JSON in un oggetto JavaScript
-//     })
-//     .then(note => {
-//         console.log(note);
+function NotesWithCategories(){
+    fetch('/note_categorie')
+    .then(response => {
+        console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Status: ${response.status}`);
+        }
+        return response.json();  // Converte la risposta JSON in un oggetto JavaScript
+    })
+    .then(note => {
+        console.log(note);
 
-//         // Trova il contenitore dove inserire la tabella
-//         const container = document.getElementById("tablecontainer1");
+        // Trova il contenitore dove inserire la tabella
+        //const container = document.getElementById("tablecontainer1");
 
-//         const table = PopolaTabellaNote(note, true);
+        const table = PopolaTabellaNote(note, true);
 
-//         // Aggiungi la tabella al contenitore
-//         container.appendChild(table);
-//     })
-//     .catch(error => {
-//         console.error('Si è verificato un errore:', error);
-//         document.querySelector('h1').textContent = 'Errore nel caricamento';
-//     });
-// }
+        // Aggiungi la tabella al contenitore
+        container.appendChild(table);
+    })
+    .catch(error => {
+        console.error('Si è verificato un errore:', error);
+        document.querySelector('h1').textContent = 'Errore nel caricamento';
+    });
+}
 
 
 
 // document.getElementById("ViewNotesWithoutCategories").addEventListener("click", NotesWithoutCategories);
 
-// function NotesWithoutCategories(){
-//     fetch('/note_senza_categorie')
-//     .then(response => {
-//         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
-//         if (!response.ok) {
-//             throw new Error(`Errore HTTP! Status: ${response.status}`);
-//         }
-//         return response.json();  // Converte la risposta JSON in un oggetto JavaScript
-//     })
-//     .then(note => {
-//         console.log(note);
+function NotesWithoutCategories(){
+    fetch('/note_senza_categorie')
+    .then(response => {
+        console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Status: ${response.status}`);
+        }
+        return response.json();  // Converte la risposta JSON in un oggetto JavaScript
+    })
+    .then(note => {
+        console.log(note);
 
-//         // Trova il contenitore dove inserire la tabella
-//         const container = document.getElementById("tablecontainer2");
+        // Trova il contenitore dove inserire la tabella
+        //const container = document.getElementById("tablecontainer2");
 
-//         const table = PopolaTabellaNote(note, false);
+        const table = PopolaTabellaNote(note, false);
 
-//         // Aggiungi la tabella al contenitore
-//         container.appendChild(table);
-//     })
-//     .catch(error => {
-//         console.error('Si è verificato un errore:', error);
-//         document.querySelector('h1').textContent = 'Errore nel caricamento';
-//     });
-// }
+        // Aggiungi la tabella al contenitore
+        container.appendChild(table);
+    })
+    .catch(error => {
+        console.error('Si è verificato un errore:', error);
+        document.querySelector('h1').textContent = 'Errore nel caricamento';
+    });
+}
 
 
 
@@ -227,15 +208,15 @@ function ViewNotesHU() {
 
 function PopolaTabellaNote(note, haveCategories){
 
+  //Cancella Tabella se già esistente
+  checkAndRemoveElement("NotesTable")
+
+
     // Crea il tag <table>
     const table = document.createElement('table');
-    //table.classList.add('table'); 
-    table.classList.add('table-sm');
-    table.classList.add('caption-top');
-    table.classList.add('table-primary');
-    table.classList.add('table-bordered');
+    table.id = "NotesTable";
+    table.classList.add('table-sm','caption-top', 'table-primary', 'table-bordered');
     
-   
 
     // Crea il <thead> con le intestazioni
     const thead = document.createElement('thead');
@@ -281,7 +262,8 @@ function PopolaTabellaNote(note, haveCategories){
         row.appendChild(contenutoCell);
 
         const dataCreazioneCell = document.createElement("td");
-        dataCreazioneCell.textContent = nota.data_creazione;
+        const Data = new Date(nota.data_creazione);
+        dataCreazioneCell.textContent = Data.toISOString().split('T')[0];
         row.appendChild(dataCreazioneCell);
 
         if(haveCategories){
@@ -306,13 +288,8 @@ function CreaTabellaUtenti(users){
 
     // Crea il tag <table>
     const table = document.createElement('table');
-    //table.classList.add('table'); 
-    table.classList.add('table-sm');
-    table.classList.add('caption-top');
-    table.classList.add('table-primary');
-    table.classList.add('table-bordered');
-    
-   
+    table.id = "UsersTable";
+    table.classList.add('table-sm','caption-top','table-primary','table-bordered');    
 
     // Crea il <thead> con le intestazioni
     const thead = document.createElement('thead');
@@ -400,4 +377,13 @@ function CreaTabellaUtenti(users){
     table.appendChild(tbody);
 
     return table;
+}
+
+
+
+function checkAndRemoveElement(selector) {
+  const element = document.getElementById(selector); // Trova l'elemento con il selettore fornito
+  if (element) {
+    element.remove(); // Rimuovi l'elemento se esiste
+  }
 }
