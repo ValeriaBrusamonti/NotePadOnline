@@ -65,6 +65,10 @@
     --bs-code-color: #d63384;
     --bs-highlight-bg: #faf4e0;
   }
+
+  li h3.Annahover:hover {
+    text-decoration: underline;
+}
   
   *,
   *::before,
@@ -663,6 +667,24 @@
     margin-left: calc(-0.5 * var(--bs-gutter-x));
   }
   .row > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+  }
+
+  .rowAnna {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+  }
+  .rowAnna > * {
     flex-shrink: 0;
     width: 100%;
     max-width: 100%;
@@ -1763,14 +1785,15 @@
   }
   
   .table-sm > :not(caption) > * > * {
-    padding: 0.25rem 0.25rem;
+    padding: 1rem 1rem;
+    text-align: center;
   }
   
   .table-bordered > :not(caption) > * {
-    border-width: 1px 0;
+    border-width: 2px 0;
   }
   .table-bordered > :not(caption) > * > * {
-    border-width: 0 1px;
+    border-width: 0 2px;
   }
   
   .table-borderless > :not(caption) > * > * {
@@ -7801,6 +7824,10 @@
   .mb-5 {
     margin-bottom: 3rem !important;
   }
+
+  .mb-6 {
+    margin-bottom: 10rem !important;
+  }
   
   .mb-auto {
     margin-bottom: auto !important;
@@ -7988,6 +8015,10 @@
   
   .pb-5 {
     padding-bottom: 3rem !important;
+  }
+
+  .pb-6 {
+    padding-bottom: 5rem !important;
   }
   
   .ps-0 {
@@ -11046,6 +11077,7 @@
     text-transform: uppercase;
     letter-spacing: 0.15rem;
     border: 0;
+    margin-bottom: 7rem;
   }
   
   .masthead {
@@ -11054,7 +11086,9 @@
     height: auto;
     min-height: 35rem;
     padding: 15rem 0;
+
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../images/sfondo.jpg");
+
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -11097,15 +11131,16 @@
   }
   
   .about-section {
-    padding-top: 10rem;
-    background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+    padding-top: 5rem;
+    background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 85%, rgba(0, 0, 0, 0.5) 100%);
   }
   .about-section p {
     margin-bottom: 5rem;
   }
   
   .projects-section {
-    padding: 10rem 0;
+    padding: 5rem 0;
+    background: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 85%, rgba(0, 0, 0, 0.5) 100%);
   }
   .projects-section .featured-text {
     padding: 2rem;

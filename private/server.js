@@ -122,8 +122,98 @@ app.post('/noteascelta', (req, res) => {
   });
 });
 
-// Crea una route per ottenere le note
+
+app.post('/info_utente', (req, res) => {
+  // Assumiamo che l'email venga passata nel body della richiesta
+  const email = req.body.email;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email mancante' });
+  }
+
+  // Query con parametri per evitare SQL Injection
+  const query = `SELECT * FROM utenti WHERE email = $1`;
+
+  // Esegui la query
+  client.query(query, [email], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Errore nel database' });
+    }
+    res.json(result.rows);
+  });
+});
+
+
+
+//note con la relativa categoria PER SEZIONE REPORTISTICA
+app.get('/note_categorie', (req, res) => {
+
+  const query = `
+    SELECT no.titolo, no.contenuto, no.data_creazione, c.name AS categoria
+    FROM note no 
+    INNER JOIN categorie c ON c.idc = no.idc `;
+
+  client.query(query, (err, result) => {
+    if (err) {
+        console.error('Errore durante la query:', err.stack);
+        return res.status(500).send('Errore durante la query');
+    }
+    // Rispondi con i risultati della query come JSON
+    res.json(result.rows);
+  });
+  
+});
+
+
+
+app.get('/note_heavy_user', (req, res) => {
+
+  const query = `
+    SELECT * 
+    FROM note no 
+    INNER JOIN accesso a ON a.idn = no.idn 
+    WHERE a.email = (SELECT a.email
+        FROM accesso a
+            GROUP BY a.email
+                ORDER BY COUNT(*) DESC
+                    LIMIT 1) `;
+
+  client.query(query, (err, result) => {
+    if (err) {
+        console.error('Errore durante la query:', err.stack);
+        return res.status(500).send('Errore durante la query');
+    }
+    // Rispondi con i risultati della query come JSON
+    res.json(result.rows);
+  });
+  
+});
+
+
+// Crea una route per ottenere le note che non hanno categorie
+app.get('/note_senza_categorie', (req, res) => {
+
+  const query = `
+    SELECT titolo, contenuto, data_creazione
+    FROM note 
+    WHERE idc IS NULL `;
+
+  client.query(query, (err, result) => {
+    if (err) {
+        console.error('Errore durante la query:', err.stack);
+        return res.status(500).send('Errore durante la query');
+    }
+    // Rispondi con i risultati della query come JSON
+    res.json(result.rows);
+  });
+  
+});
+
+
+
 app.get('/note', (req, res) => {
+
   // Query per ottenere gli utenti dal database
   client.query("SELECT * FROM note ORDER BY titolo", (err, result) => {
     if (err) {
@@ -135,6 +225,7 @@ app.get('/note', (req, res) => {
   });
   
 });
+
 
 // Crea una route per ottenere le note
 app.get('/utenti', (req, res) => {

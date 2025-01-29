@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title>PersonalNotes</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+
+
+
+        <link href="/CSS/_better.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <!--<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container px-4 px-lg-5">-->
+                <!--<a class="navbar-brand" href="#page-top">Start Bootstrap</a>-->
+                <!--<div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#notes_categories">All Notes with Categories</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#notes_without_categories">All Notes without Categories</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#notes_x_user">Notes x User</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#notes_heavy_user">Heavy User</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>-->
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <h1 class="mx-auto my-0 text-uppercase">Personal Notes</h1>
+                        <h2 class="text-white-50 mx-auto mt-2 mb-5">Of User</h2>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <!-- Azioni Possibili-->
+        <section class="about-section text-start">
+            <div class="container px-4 px-lg-4">
+                <div class="rowAnna gx-4 gx-lg-5 justify-content-start">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-6 pb-8">What you need to do?</h2>
+                        <!--<a class="btn btn-primary" id="ViewNotesWithCategories">Click to view</a>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes with Categories Table-->
+        <section class="projects-section bg-light">
+            <div class="container px-4 px-lg-4" id="userinfo">
+
+                <table id="user_data">
+                    <tr>
+                        <th>Nome: </th>
+                        <td>
+                            <div class="row input-group-newsletter">
+                            <div class="col"><input class="form-control" id="name" type="text" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cognome: </th>
+                        <td>
+                            <div class="row input-group-newsletter">
+                                <div class="col"><input class="form-control" id="surname" type="text" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Email: </th>
+                        <td>
+                            <div class="row input-group-newsletter">
+                                <div class="col"><input class="form-control" id="email" type="text" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Password: </th>
+                        <td>
+                            <div class="row input-group-newsletter">
+                                <div class="col"><input class="form-control" id="password" type="text" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Data di Nascita: </th>
+                        <td>
+                            <div class="row input-group-newsletter">
+                                <div class="col"><input class="form-control" id="data_nascita" type="text" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Città: </th>
+                        <td>
+                            <div class="row input-group-newsletter">
+                                <div class="col"><input class="form-control" id="city" type="text" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Stato: </th>
+                        <td>
+                            <div class="row input-group-newsletter">
+                                <div class="col"><input class="form-control" id="state" type="text" /></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <a class="btn btn-primary" id="ViewNotes">View all Notes</a>
+                <!--<a class="btn btn-primary" id="ViewUsersOperations">Users Operations</a>-->
+                 
+                <div id="contenuto"></div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+        <!-- Notes with Categories
+        <section class="about-section text-center" id="notes_categories">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-4">All Notes with their Category</h2>
+                        <a class="btn btn-primary" id="ViewNotesWithCategories">Click to view</a>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+
+        <!-- Notes with Categories Table
+        <section class="projects-section bg-light" id="projects">
+            <div class="container px-4 px-lg-5" id="tablecontainer1">
+            </div>
+        </section>-->
+
+        <!-- Notes without Categories
+        <section class="about-section text-center" id="notes_without_categories">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-4">All Notes without a Category</h2>
+                        <a class="btn btn-primary" id="ViewNotesWithoutCategories">Click to view</a>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+        
+        <!-- Notes without Categories Table 
+        <section class="projects-section bg-light" id="projects">
+            <div class="container px-4 px-lg-5" id="tablecontainer2">
+            </div>
+        </section>-->
+
+        <!-- Notes x User
+        <section class="about-section text-center" id="notes_x_user">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-4">All Notes of a User</h2>
+                        <div class="row input-group-newsletter">
+                            <div class="col"><input class="form-control" id="emailAddress" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
+                            
+                        </div>
+                        <a class="btn btn-primary" id="ViewNotesOfUser">Click to view</a>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+
+        <!-- Notes x User Table
+        <section class="projects-section bg-light" id="projects">
+            <div class="container px-4 px-lg-5" id="tablecontainer3">
+            </div>
+        </section>-->
+
+        <!-- Notes of the heavier User
+        <section class="about-section text-center" id="notes_heavy_user">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-4">All Notes of the Havier User</h2>-->
+                        <!--<p class="text-white-50">Don't risk, use our website to store all your thoughts, to do lists and memos</p>-->
+                        <!--<a class="btn btn-primary" id="ViewNotesOfHeavyUser">Click to view</a>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+
+        <!-- Notes of the heavier User Table
+        <section class="projects-section bg-light" id="projects">
+            <div class="container px-4 px-lg-5" id="tablecontainer4">
+            </div>
+        </section>-->
+
+    <script src="/JS/_better_userinfo.js"></script>
+    </body>
+</html>
