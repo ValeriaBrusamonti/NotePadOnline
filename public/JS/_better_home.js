@@ -4,6 +4,58 @@ let user = params.get('name');
 
 console.log(user);Categorie();
 
+function CreaNota()
+{
+    console.log("vai");
+    const idn = UltimoIdNota();
+    fetch('/creanota', {
+        method: 'POST', // Usando il metodo POST
+        headers: {
+            'Content-Type': 'application/json' // Imposta il tipo di contenuto su JSON
+        },
+        body: JSON.stringify({ idn: idn }) // Converte l'email in un oggetto JSON
+    })
+    .then(response => {
+        console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Status: ${response.status}`);
+        }
+        return response.json();  // Converte la risposta JSON in un oggetto JavaScript
+    })
+    .then(data => {
+            Note(data);
+    })
+    .catch(error => {
+        console.error('Si è verificato un errore:', error);
+        document.querySelector('h1').textContent = 'Errore nel caricamento';
+    });
+}
+
+function UltimoIdNota()
+{
+    let num=0;
+    fetch('/note')
+            .then(response => {
+                console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+                if (!response.ok) {
+                    throw new Error(`Errore HTTP! Status: ${response.status}`);
+                }
+                return response.json();  // Converte la risposta JSON in un oggetto JavaScript
+            })
+            .then(data => {
+                data.forEach(nota => {
+                    if(num<nota.idn) num = nota.idn;
+                    console.log(num);
+                });
+                const idn = num+1;
+            })
+            .catch(error => {
+                console.error('Si è verificato un errore:', error);
+                document.querySelector('h1').textContent = 'Errore nel caricamento';
+            });
+    return idn;
+}
+
 function AggiungiEvento()
 {
     const icone = document.querySelectorAll('.icona');
@@ -34,7 +86,10 @@ function ApriCartella(cartella)
     while (doubleContent.firstChild) {
         doubleContent.removeChild(doubleContent.firstChild);
     }
-    document.getElementById("doublecontent").innerHTML='<input type="text" placeholder="Cerca" id="cerca">';
+    document.getElementById("doublecontent").innerHTML='<input type="text" placeholder="Cerca" id="cerca"> <div id="aggiungi"> <input type="button" id="aggiunginota" value="Aggiungi Nota"> </div>';
+    
+document.getElementById("aggiunginota").addEventListener("click",CreaNota);
+
     fetch('/note')
             .then(response => {
                 console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
@@ -91,7 +146,9 @@ function Categorie()
         console.error('Si è verificato un errore:', error);
         document.querySelector('h1').textContent = 'Errore nel caricamento';
     });
-    document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+'<div id="aggiungi"> <input id="piu" type="button" value="+"> <input type="button" id="aggiunginota" value="Aggiungi Nota"> </div>';
+    document.getElementById("doublecontent").innerHTML=document.getElementById("doublecontent").innerHTML+'<div id="aggiungi"> <input type="button" id="aggiunginota" value="Aggiungi Nota"> </div>';
+    
+    document.getElementById("aggiunginota").addEventListener("click",CreaNota);
 
 }
 function Note(categorie)

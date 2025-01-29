@@ -96,6 +96,31 @@ app.post('/categorieascelta', (req, res) => {
   });
 });
 
+
+app.post('/creanota', (req, res) => {
+  // Assumiamo che l'email venga passata nel body della richiesta
+  const email = req.body.email;
+
+  if (!email) {
+    return res.status(400).json({ error: 'Email mancante' });
+  }
+
+  // Query con parametri per evitare SQL Injection
+  const query = `
+    INSERT INTO note(idn, titolo, contenuto, data_creazione, idc) OVERRIDING SYSTEM VALUE VALUES($1, 'Nota numero $1', null, null, null)
+  `;
+
+  // Esegui la query
+  client.query(query, [idn], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Errore nel database' });
+    }
+    res.json(result.rows);
+  });
+});
+
+
 app.post('/noteascelta', (req, res) => {
   // Assumiamo che l'email venga passata nel body della richiesta
   const email = req.body.email;
@@ -125,7 +150,7 @@ app.post('/noteascelta', (req, res) => {
 // Crea una route per ottenere le note
 app.get('/note', (req, res) => {
   // Query per ottenere gli utenti dal database
-  client.query("SELECT * FROM note ORDER BY titolo", (err, result) => {
+  client.query("SELECT * FROM note ORDER BY idn", (err, result) => {
     if (err) {
         console.error('Errore durante la query:', err.stack);
         return res.status(500).send('Errore durante la query');
@@ -174,7 +199,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_nota.html'));  //public\HTMLpages\index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_index.html'));  //public\HTMLpages\index.html
 });
 
 app.listen(port, () => {

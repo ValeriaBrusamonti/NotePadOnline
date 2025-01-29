@@ -20,25 +20,30 @@ body
     display: block;
     float: right;
     height: 5vh;
-    background-color: #BBE0B1;
     padding-bottom: 0vh;
 }
-#piu
+
+
+#aggiunginota:hover
 {
-    height: 5vh;
-    width: 5vh;
-    font-size: 2vh;
-    background-color: #BBE0B1;
-    border-radius: 2vh;
+    /* background-color: white;
+    color: #64a19d; */
+    opacity: 100%;
 }
+
 #aggiunginota
 {
     height: 5vh;
     width: 15vh;
-    background-color: #BBE0B1;
+    text-align: center;
+    background-color: #64a19d;
+    color:white;
+    vertical-align:bottom;
+    opacity: 80%;
     font-size: 2vh;
+    border-radius: 1vh;
     border: 0vh; 
-}
+} 
 table
 {
     border:solid;
@@ -193,7 +198,7 @@ li
     background-color: #64a19d;
     color:white;
     vertical-align:bottom;
-    opacity: 70%;
+    opacity: 100%;
 }
 
 .cat:hover
@@ -205,6 +210,10 @@ li
 
 .nota
 {
-    opacity: 100%;
+    opacity:65%;
     background-color: white;
+}
+.nota:hover
+{
+    opacity:100%;
 }
