@@ -80,10 +80,10 @@ app.post('/categorieascelta', (req, res) => {
   // Query con parametri per evitare SQL Injection
   const query = `
     SELECT * 
-    FROM categorie c 
-    INNER JOIN note no ON c.idc = no.idc 
-    INNER JOIN accesso a ON a.idn = no.idn 
+    FROM appartenenza a
+    INNER JOIN categorie c ON c.idc = a.idc
     WHERE a.email = $1
+    ORDER BY c.idc
   `;
 
   // Esegui la query
@@ -213,8 +213,9 @@ app.get('/note_senza_categorie', (req, res) => {
 
 
 app.get('/note', (req, res) => {
-  
-  client.query("SELECT * FROM note", (err, result) => {
+
+  // Query per ottenere gli utenti dal database
+  client.query("SELECT * FROM note ORDER BY titolo", (err, result) => {
     if (err) {
         console.error('Errore durante la query:', err.stack);
         return res.status(500).send('Errore durante la query');
@@ -264,7 +265,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_index.html'));  //public\HTMLpages\index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_nota.html'));  //public\HTMLpages\index.html
 });
 
 app.listen(port, () => {

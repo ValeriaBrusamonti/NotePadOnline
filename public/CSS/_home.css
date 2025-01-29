@@ -1,0 +1,210 @@
+body
+{
+    background-color: white;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000 100%), url("../images/sfondo.jpg");
+    background-size: cover;
+    font-family: serif;
+    padding: 0vh;
+    margin: 0vh;
+    overflow: hidden;   
+    z-index: 0;
+}
+
+#aggiungi
+{
+    z-index: 1;
+    position: absolute;
+    bottom: 0vh;
+    right: 2vh;
+    display: block;
+    float: right;
+    height: 5vh;
+    background-color: #BBE0B1;
+    padding-bottom: 0vh;
+}
+#piu
+{
+    height: 5vh;
+    width: 5vh;
+    font-size: 2vh;
+    background-color: #BBE0B1;
+    border-radius: 2vh;
+}
+#aggiunginota
+{
+    height: 5vh;
+    width: 15vh;
+    background-color: #BBE0B1;
+    font-size: 2vh;
+    border: 0vh; 
+}
+table
+{
+    border:solid;
+    border-color:white;
+    border-width: 0.5vh;
+    width: 100vw;
+    text-align: center;
+}
+
+.header, .content, .footer
+{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    display: inline-block;
+}
+.header
+{
+    background-color: gray;
+    text-decoration-style: none;
+    color: white;
+    font-size: 3.5vh;
+    line-height: 5vh;
+    text-align: center;
+}
+#navbar
+{
+    width: 20vw;
+    margin: 0vw;
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vh 3vh;
+    float: left;
+    list-style: none;
+    overflow-x: hidden;
+    padding: 0vh;
+    z-index: 0;
+}
+ul
+{
+    display: block;
+    list-style-type: none;
+    padding: left;
+    width:20vw;
+    padding: 0vw;
+    margin: 0vw;
+    overflow-y: scroll; 
+    max-height: 93vh;
+    overflow-x: hidden;
+
+}
+li
+{
+
+    margin: 0;
+    width: 20vw;
+    padding:0vw;
+    height: 3vh;
+    display: block;
+    border:#0C4714 solid 0.1vh;
+}
+#doublecontent
+{
+    top: 0vh;
+    display: inline-block;
+    width:80vw;
+    height: 93vh;
+    margin: 0vh;
+    padding: 0vh;
+
+    float: left;
+    overflow: auto; 
+    z-index: 0;
+}
+/* .content
+{
+    top: 0vh;
+    margin:auto;
+    display: block;
+    padding: 0px;
+    width: 100vw;
+    height: 0vh;
+    float: left;
+} */
+#cerca
+{
+    width: 60vw;
+    float: left;
+    margin-left: 10vw;
+    margin-top: 2vh;
+    font-size: 2vh;
+    padding: 0.5vh;
+    border-radius:20vh ;
+    display: inline;
+}
+.icona
+{
+    height: 16vw;
+    width: 16vw;
+    float: left;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10vh;
+    margin-left: 8vw;
+    background-image: url("../images/cartella.png");
+    background-position: center;
+    border: 0.1vh black solid;
+    text-align: center;
+}
+.icona h1
+{
+    color: black;
+    background-color: white;
+    font-weight: normal;
+    font-size: 3.5vh;
+    border-radius: 25vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
+    border: 0.1vh black solid;
+}
+.icona_nota
+{
+    height: 16vw;
+    width: 16vw;
+    float: left;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10vh;
+    margin-left: 8vw;
+    background-image: url("../images/nota.png");
+    background-position: center;
+    border: 0.1vh black solid;
+    text-align: center;
+    background-size: 10vw;
+    background-repeat: no-repeat;
+}
+.icona_nota h1
+{
+    color: black;
+    background-color: white;
+    font-weight: normal;
+    font-size: 3.5vh;
+    border-radius: 25vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
+    border: 0.1vh black solid;
+}
+.cat
+{
+    text-align: center;
+    background-color: #64a19d;
+    color:white;
+    vertical-align:bottom;
+    opacity: 70%;
+}
+
+.cat:hover
+{
+    /* background-color: white;
+    color: #64a19d; */
+    opacity: 100%;
+}
+
+.nota
+{
+    opacity: 100%;
+    background-color: white;
+}
