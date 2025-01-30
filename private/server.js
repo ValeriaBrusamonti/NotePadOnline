@@ -97,28 +97,105 @@ app.post('/categorieascelta', (req, res) => {
 });
 
 
-app.post('/creanota', (req, res) => {
-  // Assumiamo che l'email venga passata nel body della richiesta
-  const email = req.body.email;
+app.post('/aggiungiaccesso', (req, res) => {
+  const { idn, email } = req.body;
 
-  if (!email) {
-    return res.status(400).json({ error: 'Email mancante' });
+  if (!idn || !email) {
+    return res.status(400).json({ error: 'Id o email mancanti' });
   }
 
   // Query con parametri per evitare SQL Injection
   const query = `
-    INSERT INTO note(idn, titolo, contenuto, data_creazione, idc) OVERRIDING SYSTEM VALUE VALUES($1, 'Nota numero $1', null, null, null)
+    INSERT INTO accesso(email, idn) OVERRIDING SYSTEM VALUE VALUES($1, $2)
   `;
 
-  // Esegui la query
+  // Esegui la query con i parametri passati
+  client.query(query, [email, idn], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Errore nel database' });
+    }
+
+    // Rispondi al client una volta completata la query
+    console.log("Accesso aggiunto con successo");
+    res.status(201).json({ message: 'Accesso aggiunto con successo' });
+  });
+});
+
+app.post('/creanota', (req, res) => {
+  const { idn } = req.body;
+
+  if (!idn) {
+    return res.status(400).json({ error: 'Id mancante' });
+  }
+
+  // Query con parametri per evitare SQL Injection
+  const query = `
+    INSERT INTO note(idn, titolo, contenuto, data_creazione, idc)
+    OVERRIDING SYSTEM VALUE VALUES($1, 'Nota senza nome', null, null, null)
+  `;
+
+  // Esegui la query con i parametri passati
   client.query(query, [idn], (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ error: 'Errore nel database' });
     }
-    res.json(result.rows);
+
+    // Rispondi al client una volta completata la query
+    console.log("Nota creata con successo");
+    res.status(201).json({ message: 'Nota creata con successo' });
   });
 });
+
+
+
+// app.post('/creanota', (req, res) => {
+//   // Assumiamo che l'email venga passata nel body della richiesta
+//   const idn = req.body.idn;
+
+//   if (!idn) {
+//     return res.status(400).json({ error: 'Id mancante' });
+//   }
+
+//   // Query con parametri per evitare SQL Injection
+//   const query = `
+//     INSERT INTO note(idn, titolo, contenuto, data_creazione, idc) OVERRIDING SYSTEM VALUE VALUES($1, 'Nota senza nome', null, null, null)
+//   `;
+
+//   // Esegui la query
+//   client.query(query, [idn], (err, result) => {
+//     if (err) {
+//       console.error(err);
+//       return res.status(500).json({ error: 'Errore nel database' });
+//     }
+//     return console.log("Nota creata")
+//   });
+// });
+
+// app.post('/aggiungiaccesso', (req, res) => {
+
+//   const idn = req.body.idn;
+//   const email = req.body.email;
+
+//   if (!idn) {
+//     return res.status(400).json({ error: 'Id mancante' });
+//   }
+
+//   // Query con parametri per evitare SQL Injection
+//   const query = `
+//     INSERT INTO accesso(email,idn) OVERRIDING SYSTEM VALUE VALUES($1,$2)
+//   `;
+
+//   // Esegui la query
+//   client.query(query, [email],[idn], (err, result) => {
+//     if (err) {
+//       console.error(err);
+//       return res.status(500).json({ error: 'Errore nel database' });
+//     }
+//     return console.log("Nota creata")
+//   });
+// });
 
 
 app.post('/noteascelta', (req, res) => {
@@ -290,7 +367,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_index.html'));  //public\HTMLpages\index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_nota.html'));  //public\HTMLpages\index.html
 });
 
 app.listen(port, () => {

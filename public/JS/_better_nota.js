@@ -1,3 +1,12 @@
+let params = new URLSearchParams(window.location.search);
+const idn = params.get('idn');
+
+function caricamento()
+{
+    
+}
+
+
 document.getElementById('saveBtn').addEventListener('click', () => {
     const content = document.getElementById('editor').innerHTML;
     localStorage.setItem('document', content);

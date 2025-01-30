@@ -1,14 +1,46 @@
 let params = new URLSearchParams(window.location.search);
-let user = params.get('name');
+const user = params.get('name');
 
 
 console.log(user);Categorie();
 
-function CreaNota()
+// document.getElementById("doublecontent").addEventListener("change",InserisciBottone)
+
+const targetNode = document.getElementById('doublecontent');
+
+const observer = new MutationObserver(function(mutationsList, observer) {
+
+    for (let mutation of mutationsList) {
+    if (mutation.type === 'childList') {
+    InserisciBottone();
+    
+    }
+    }
+});
+
+// Configura il MutationObserver per osservare i cambiamenti nel contenuto dell'elemento
+const config = { childList: true, subtree: true };
+
+// Avvia l'osservazione
+observer.observe(targetNode, config);
+
+
+function InserisciBottone()
 {
-    console.log("vai");
-    const idn = UltimoIdNota();
-    fetch('/creanota', {
+    console.log("Inserimento");
+    const btn = document.getElementById("aggiunginota");
+    btn.addEventListener("click",CreaNota)
+}
+
+function CreaNota()
+{   
+    UltimoIdNota().then(massimo=>
+    {
+        const idn = massimo;
+    
+    
+        console.log(idn);
+        fetch('/creanota', {
         method: 'POST', // Usando il metodo POST
         headers: {
             'Content-Type': 'application/json' // Imposta il tipo di contenuto su JSON
@@ -22,38 +54,77 @@ function CreaNota()
         }
         return response.json();  // Converte la risposta JSON in un oggetto JavaScript
     })
-    .then(data => {
-            Note(data);
-    })
     .catch(error => {
         console.error('Si è verificato un errore:', error);
         document.querySelector('h1').textContent = 'Errore nel caricamento';
     });
+
+    const email = user;
+console.log(email);
+console.log(idn);
+
+fetch('/aggiungiaccesso', {
+    method: 'POST', // Usando il metodo POST
+    headers: {
+        'Content-Type': 'application/json' // Imposta il tipo di contenuto su JSON
+    },
+    body: JSON.stringify({ idn: idn, email: email }) 
+    // Converte idn ed email in un unico oggetto JSON
+})
+.then(response => {
+    console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+    if (!response.ok) {
+        throw new Error(`Errore HTTP! Status: ${response.status}`);
+    }
+    return response.json();  // Converte la risposta JSON in un oggetto JavaScript
+})
+.catch(error => {
+    console.error('Si è verificato un errore:', error);
+    document.querySelector('h1').textContent = 'Errore nel caricamento';
+});
+
+let url = 'better_nota.html?idn=' + idn;
+                window.open(url, '_blank');
+});
 }
 
-function UltimoIdNota()
+
+async function UltimoIdNota() {
+    try {
+        // Effettua la richiesta fetch e aspetta la risposta
+        const response = await fetch('/note');
+        console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+        
+        // Verifica se la risposta è ok (status 200-299)
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Status: ${response.status}`);
+        }
+
+        // Converte la risposta JSON in un oggetto JavaScript
+        const data = await response.json();
+        
+        // Calcola il massimo id più uno
+        const massimo = TrovaMassimo(data) + 1;
+        console.log(massimo);
+        
+        return massimo;  // Restituisce il valore massimo
+
+    } catch (error) {
+        // Gestisce eventuali errori
+        console.error('Si è verificato un errore:', error);
+        document.querySelector('h1').textContent = 'Errore nel caricamento';
+        
+        return null;  // Restituisce null in caso di errore
+    }
+}
+function TrovaMassimo(array)
 {
-    let num=0;
-    fetch('/note')
-            .then(response => {
-                console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
-                if (!response.ok) {
-                    throw new Error(`Errore HTTP! Status: ${response.status}`);
-                }
-                return response.json();  // Converte la risposta JSON in un oggetto JavaScript
-            })
-            .then(data => {
-                data.forEach(nota => {
-                    if(num<nota.idn) num = nota.idn;
-                    console.log(num);
-                });
-                const idn = num+1;
-            })
-            .catch(error => {
-                console.error('Si è verificato un errore:', error);
-                document.querySelector('h1').textContent = 'Errore nel caricamento';
-            });
-    return idn;
+    let num = 0;
+    for(let i=0; i<array.length;i++)
+    {
+        if(num<array[i].idn) num = array[i].idn;
+    }
+    return num;
 }
 
 function AggiungiEvento()
@@ -87,8 +158,6 @@ function ApriCartella(cartella)
         doubleContent.removeChild(doubleContent.firstChild);
     }
     document.getElementById("doublecontent").innerHTML='<input type="text" placeholder="Cerca" id="cerca"> <div id="aggiungi"> <input type="button" id="aggiunginota" value="Aggiungi Nota"> </div>';
-    
-document.getElementById("aggiunginota").addEventListener("click",CreaNota);
 
     fetch('/note')
             .then(response => {
