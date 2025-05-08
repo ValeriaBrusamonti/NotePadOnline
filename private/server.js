@@ -12,7 +12,7 @@ const ip = '127.0.0.1';
 
 
 // La tua stringa di connessione Neon DB
-const connectionString = 'postgresql://personalnotes_owner:JA8y7SZCBFbl@ep-autumn-block-a9w6vfqn.gwc.azure.neon.tech/personalnotes?sslmode=require';
+const connectionString = 'postgresql://personalnotes_owner:JA8y7SZCBFbl@ep-autumn-block-a9w6vfqn-pooler.gwc.azure.neon.tech/personalnotes?sslmode=require';
 
 // Creazione del client
 const client = new Client({
@@ -367,7 +367,7 @@ app.post('/accessoutente', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_index.html'));  //public\HTMLpages\index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'BetterHTML', 'better_index.html'));  //public/HTMLpages/index.html
 });
 
 app.listen(port, () => {

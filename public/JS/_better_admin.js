@@ -53,7 +53,7 @@ function UsersOperations(){
 
 function GetUtenti() {
 
-    fetch('/utenti')
+    fetch('http://127.0.0.1:3000/utenti')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Errore nella richiesta');
@@ -70,7 +70,7 @@ function GetUtenti() {
       .catch((error) => {
         console.error('Errore nella chiamata API:', error);
       });
-  }
+}
 // window.addEventListener('DOMContentLoaded', event => {
 
 //     // Navbar shrink function
@@ -90,65 +90,70 @@ function GetUtenti() {
 //     // Shrink the navbar when page is scrolled
 //     document.addEventListener('scroll', navbarShrink);
 // });
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.getElementById('NotesOfHeavyUser');
+  if (btn) {
+    btn.addEventListener('click', ViewNotesHU);
+  }
+});
+
+document.getElementById("NotesWithCategories").addEventListener("click", NotesWithCategories);
+
+function NotesWithCategories(){
+    fetch('http://127.0.0.1:3000/note_categorie')
+    .then(response => {
+        console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Status: ${response.status}`);
+        }
+        return response.json();  // Converte la risposta JSON in un oggetto JavaScript
+    })
+    .then(note => {
+        console.log(note);
+
+        // Trova il contenitore dove inserire la tabella
+        //const container = document.getElementById("tablecontainer1");
+
+        const table = PopolaTabellaNote(note, true);
+
+        // Aggiungi la tabella al contenitore
+        container.appendChild(table);
+    })
+    .catch(error => {
+        console.error('Si è verificato un errore:', error);
+        document.querySelector('h1').textContent = 'Errore nel caricamento';
+    });
+}
 
 
-// document.getElementById("ViewNotesWithCategories").addEventListener("click", NotesWithCategories);
 
-// function NotesWithCategories(){
-//     fetch('/note_categorie')
-//     .then(response => {
-//         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
-//         if (!response.ok) {
-//             throw new Error(`Errore HTTP! Status: ${response.status}`);
-//         }
-//         return response.json();  // Converte la risposta JSON in un oggetto JavaScript
-//     })
-//     .then(note => {
-//         console.log(note);
+document.getElementById("NotesWithoutCategories").addEventListener("click", NotesWithoutCategories);
 
-//         // Trova il contenitore dove inserire la tabella
-//         const container = document.getElementById("tablecontainer1");
+function NotesWithoutCategories(){
+    fetch('http://127.0.0.1:3000/note_senza_categorie')
+    .then(response => {
+        console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
+        if (!response.ok) {
+            throw new Error(`Errore HTTP! Status: ${response.status}`);
+        }
+        return response.json();  // Converte la risposta JSON in un oggetto JavaScript
+    })
+    .then(note => {
+        console.log(note);
 
-//         const table = PopolaTabellaNote(note, true);
+        // Trova il contenitore dove inserire la tabella
+        //const container = document.getElementById("tablecontainer2");
 
-//         // Aggiungi la tabella al contenitore
-//         container.appendChild(table);
-//     })
-//     .catch(error => {
-//         console.error('Si è verificato un errore:', error);
-//         document.querySelector('h1').textContent = 'Errore nel caricamento';
-//     });
-// }
+        const table = PopolaTabellaNote(note, false);
 
-
-
-// document.getElementById("ViewNotesWithoutCategories").addEventListener("click", NotesWithoutCategories);
-
-// function NotesWithoutCategories(){
-//     fetch('/note_senza_categorie')
-//     .then(response => {
-//         console.log('Risposta ricevuta dal server:', response); // Log della risposta completa
-//         if (!response.ok) {
-//             throw new Error(`Errore HTTP! Status: ${response.status}`);
-//         }
-//         return response.json();  // Converte la risposta JSON in un oggetto JavaScript
-//     })
-//     .then(note => {
-//         console.log(note);
-
-//         // Trova il contenitore dove inserire la tabella
-//         const container = document.getElementById("tablecontainer2");
-
-//         const table = PopolaTabellaNote(note, false);
-
-//         // Aggiungi la tabella al contenitore
-//         container.appendChild(table);
-//     })
-//     .catch(error => {
-//         console.error('Si è verificato un errore:', error);
-//         document.querySelector('h1').textContent = 'Errore nel caricamento';
-//     });
-// }
+        // Aggiungi la tabella al contenitore
+        container.appendChild(table);
+    })
+    .catch(error => {
+        console.error('Si è verificato un errore:', error);
+        document.querySelector('h1').textContent = 'Errore nel caricamento';
+    });
+}
 
 
 
@@ -196,11 +201,11 @@ function GetUtenti() {
   
 
 
-// document.getElementById("ViewNotesOfHeavyUser").addEventListener("click", ViewNotesHU);
+//document.getElementById("NotesOfHeavyUser").addEventListener("click", ViewNotesHU);
 
 function ViewNotesHU() {
 
-    fetch('/note_heavy_user')
+    fetch('http://127.0.0.1:3000/note_heavy_user')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Errore nella richiesta');
@@ -373,12 +378,12 @@ function CreaTabellaUtenti(users){
 
         // Crea i due link
         const link1 = document.createElement("a");
-        link1.href = `/../BetterHTML/better_userinfo.html?email=${encodeURIComponent(user.email)}`;
+        link1.href = `/public/BetterHTML/better_userinfo.html?email=${encodeURIComponent(user.email)}`;
         link1.target = "_self";
         link1.textContent = "Modifica";
 
         const link2 = document.createElement("a");
-        link2.href = `/../BetterHTML/better_userinfo.html?email=${encodeURIComponent(user.email)}`;
+        link2.href = `/public/BetterHTML/better_userinfo.html?email=${encodeURIComponent(user.email)}`;
         link2.target = "_self";
         link2.textContent = "Elimina";
 

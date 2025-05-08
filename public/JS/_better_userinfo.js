@@ -16,7 +16,7 @@ function LoadUserInfo(){
         return;
     }
   
-    fetch('/info_utente', {
+    fetch('http://127.0.0.1:3000/info_utente', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ function GetNotes() {
           return;
         }
       
-        fetch('/noteascelta', {
+        fetch('http://127.0.0.1:3000/noteascelta', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
