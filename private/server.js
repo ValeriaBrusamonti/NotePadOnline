@@ -224,6 +224,30 @@ app.post('/noteascelta', (req, res) => {
   });
 });
 
+app.post('/salvanota', (req, res) => {
+  // Assumiamo che l'email venga passata nel body della richiesta
+  const id= req.body.id;
+  const title = req.body.title;
+  const content = req.body.content;
+  if (!title||!content) {
+    return res.status(400).json({ error: 'Email mancante' });
+  }
+
+  // Query con parametri per evitare SQL Injection
+  const query = `
+  UPDATE note
+  SET titolo = $1,
+      contenuto = $2
+  WHERE idn = $3;
+`;
+client.query(query, [title, content, id], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Errore nel database' });
+    }
+    res.json(result.rows);
+  });
+});
 
 app.post('/info_utente', (req, res) => {
   // Assumiamo che l'email venga passata nel body della richiesta
@@ -246,6 +270,33 @@ app.post('/info_utente', (req, res) => {
   });
 });
 
+
+app.post('/loadnota', (req, res) => {
+  const id = req.body.id;
+
+  if (!id) {
+    return res.status(400).json({ error: 'ID mancante' });
+  }
+
+  const query = `
+    SELECT idc, titolo, contenuto
+    FROM note
+    WHERE idn = $1
+  `;
+
+  client.query(query, [id], (err, result) => {
+    if (err) {
+      console.error('Errore DB:', err);
+      return res.status(500).json({ error: 'Errore nel database' });
+    }
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Nota non trovata' });
+    }
+
+    res.json(result.rows[0]);
+  });
+});
 
 
 //note con la relativa categoria PER SEZIONE REPORTISTICA
@@ -327,6 +378,7 @@ app.get('/note', (req, res) => {
   });
   
 });
+
 
 
 // Crea una route per ottenere le note
